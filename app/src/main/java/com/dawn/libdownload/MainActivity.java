@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 final Uri path = Uri.parse("content://media/external/images/media/24");
-                PrintBrotherFactory.getInstance(MainActivity.this).printImage(path);
+                PrintBrotherFactory.getInstance(MainActivity.this).printImage(path, 0);
             }
         });
     }

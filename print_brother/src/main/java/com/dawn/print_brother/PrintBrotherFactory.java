@@ -12,6 +12,7 @@ import com.brother.sdk.common.ConnectorDescriptor;
 import com.brother.sdk.common.ConnectorManager;
 import com.brother.sdk.common.IConnector;
 import com.brother.sdk.common.Job;
+import com.brother.sdk.common.device.ColorProcessing;
 import com.brother.sdk.common.device.CountrySpec;
 import com.brother.sdk.common.device.Device;
 import com.brother.sdk.common.device.Duplex;
@@ -93,7 +94,7 @@ public class PrintBrotherFactory {
         }
     }
     private int failNum = 0;
-    public void printImage(Uri path){
+    public void printImage(Uri path, int color){
         Thread thread = new Thread(() -> {
             List<File> images = new ArrayList<File>();
             try{
@@ -109,9 +110,14 @@ public class PrintBrotherFactory {
             {
                 mPrintParameters.quality = PrintQuality.Draft;
                 mPrintParameters.resolution = new Resolution(300, 300);
-                mPrintParameters.margin = PrintMargin.Normal;
+                mPrintParameters.margin = PrintMargin.Borderless;//设置无边距打印
                 mPrintParameters.scale = PrintScale.FitToPrintableArea;
                 mPrintParameters.orientation = PrintOrientation.AutoRotation;
+                if(color == 1 ){
+                    mPrintParameters.color = ColorProcessing.FullColor;
+                }else{
+                    mPrintParameters.color = ColorProcessing.BlackAndWhite;
+                }
                 mPrintJob = new PrintJob(mPrintParameters, mContext, images, new Callback()
                 {
                     @Override
