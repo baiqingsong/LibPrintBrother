@@ -141,7 +141,7 @@ public class PrintBrotherFactory {
                     Log.e("dawn", "onDiscover: " + "打印失败");
                     if(failNum == 0){
                         failNum = 1;
-                        printImage(path);
+                        printImage(path, color);
                     }
                 }else{
                     Log.e("dawn", "onDiscover: " + "打印成功");
